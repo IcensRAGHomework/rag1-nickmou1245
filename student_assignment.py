@@ -1,10 +1,11 @@
+import base64
 import json
-import traceback
+from mimetypes import guess_type
+
 import requests
 from pydantic import BaseModel, Field
 from typing import List
 
-from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain_core.chat_history import BaseChatMessageHistory
 
 from langchain_core.prompts import FewShotChatMessagePromptTemplate, ChatPromptTemplate, MessagesPlaceholder
@@ -14,7 +15,6 @@ from model_configurations import get_model_configuration
 
 from langchain_openai import AzureChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
-from langchain.tools import tool
 
 gpt_chat_version = 'gpt-4o'
 gpt_config = get_model_configuration(gpt_chat_version)
@@ -123,12 +123,10 @@ def generate_hw03(question2, question3):
     )
     #print(response.content)
     response_json = json.dumps(response.content, indent=4, ensure_ascii=False).encode('utf8').decode().replace("```json\\n","").replace("\\n```","")
+    response_json = "{ \"Result\": " + response_json.replace("\\n","") + " }"
     print(response_json)
     response2 = json.loads(response_json)
-    print(response2)
-    results_json2 = json.dumps(response2)
-    response3 = "{ \"Result\": " + results_json2 + " }"
-    return json.loads(response3)
+    return response2
 
 
 def local_image_to_data_url(image_path):
