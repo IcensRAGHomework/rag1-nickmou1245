@@ -121,17 +121,10 @@ def generate_hw03(question2, question3):
          "question": "請根據問題列出台灣的紀念日，以 JSON 格式輸出:date : add : 這是一個布林值，表示是否需要將節日新增到節日清單中。根據問題判斷該節日是否存在於清單中，如果不存在，則為 true；否則為 false。 reason : 描述為什麼需要或不需要新增節日，具體說明是否該節日已經存在於清單中，以及當前清單的內容。"},
         config={"configurable": {"session_id": "holidays"}},
     )
-    #print(response.content)
     response_json = json.dumps(response.content, indent=4, ensure_ascii=False).encode('utf8').decode().replace("```json\\n","").replace("\\n```","")
-    response_json = "{ \"Result\": " + response_json.replace("\\n","") + " }"
-    print(response_json)
+    response_json = "{ \"Result\": [" + response_json.replace("\\n","").replace("\\","").replace("\"{","{").replace("}\"","}") + " ]}"
     response2 = json.loads(response_json)
     return response2
-
-
-def local_image_to_data_url(image_path):
-    pass
-
 
 def generate_hw04(question):
     image_path = './baseball.png'
