@@ -125,9 +125,9 @@ def generate_hw03(question2, question3):
     response_json = json.dumps(response.content, indent=4, ensure_ascii=False).encode('utf8').decode().replace("```json\\n","").replace("\\n```","")
     response_json = "{ \"Result\": [" + response_json.replace("\\n","").replace("\\","").replace("\"{","{").replace("}\"","}") + " ]}"
     #print(response_json)
-    response2 = json.loads(response_json)
+    #response2 = json.loads(response_json)
     #print(response2)
-    return response2
+    return response_json
 
 def generate_hw04(question):
     image_path = './baseball.png'
@@ -265,5 +265,5 @@ def demo(question):
 #print(generate_hw01("2024年台灣4月紀念日有哪些?"))
 #print(generate_hw02("2024年台灣4月紀念日有哪些?"))
 #print(get_holidays("TW", 2024, 10))
-#print(generate_hw03("2024年台灣10月紀念日有哪些?", '根據先前的節日清單，這個節日是否有在該月份清單？{"date": "10-31", "name": "蔣公誕辰紀念日"}'))
+print(generate_hw03("2024年台灣10月紀念日有哪些?", '根據先前的節日清單，這個節日是否有在該月份清單？{"date": "10-31", "name": "蔣公誕辰紀念日"}'))
 #print(generate_hw04("請問中華台北的積分是多少?"))
