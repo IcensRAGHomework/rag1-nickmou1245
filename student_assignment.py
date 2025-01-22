@@ -123,8 +123,10 @@ def generate_hw03(question2, question3):
     )
     response_json = json.dumps(response.content, indent=4, ensure_ascii=False).encode('utf8').decode().replace("```json\\n","").replace("\\n```","")
     response_json = "{ \"Result\": [" + response_json.replace("\\n","").replace("\\","").replace("\"{","{").replace("}\"","}") + " ]}"
-    response2 = json.loads(response_json)
-    return response2
+    #print(response_json)
+    #response2 = json.loads(response_json)
+    #print(response2)
+    return response_json
 
 def generate_hw04(question):
     image_path = './baseball.png'
